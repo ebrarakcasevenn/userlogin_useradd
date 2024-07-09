@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1018078247247",
+    "project_id": "fir-deneme-6e75a",
+    "storage_bucket": "fir-deneme-6e75a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018078247247:android:4dd6f540896c7a849aed3a",
+        "android_client_info": {
+          "package_name": "com.example.firebase_deneme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrf89gUIcMpWh-p9afhGsp3FZewS7Fo8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
