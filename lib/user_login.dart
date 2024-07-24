@@ -12,14 +12,12 @@ class user_login extends StatefulWidget {
 }
 
 class _user_loginState extends State<user_login> {
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  String _errorMessage="";
-  
-  Future<void> _login() async {
+  String _errorMessage = "";
 
+  Future<void> _login() async {
     setState(() {
       _errorMessage = '';
     });
@@ -31,59 +29,65 @@ class _user_loginState extends State<user_login> {
       print("User signed in: ${userCredential.user?.email}");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context)=> page()),);
+        MaterialPageRoute(builder: (context) => page()),
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'Kullanıcı bulunamadı') {
-        _errorMessage='Bu e-posta için kullanıcı bulunamadı.';
+        _errorMessage = 'Bu e-posta için kullanıcı bulunamadı.';
       } else if (e.code == 'yanlış şifre') {
-        _errorMessage='Yanlış şifre sağlandı.';
+        _errorMessage = 'Yanlış şifre sağlandı.';
       } else {
-        _errorMessage='Error: ${e.message}';
+        _errorMessage = 'Error: ${e.message}';
       }
     } catch (e) {
-      _errorMessage='Error: $e';
+      _errorMessage = 'Error: $e';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(
         title: "anasayfa",
         actions: [
           IconButton(
-            icon:Icon(Icons.home),
-            onPressed: (){
-              Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context)=>MyHomePage()));
-            }, )
-        ],),
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()));
+            },
+          )
+        ],
+      ),
       body: Padding(
-       padding: const EdgeInsets.all(70),
+        padding: const EdgeInsets.all(70),
         child: Column(
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: "email"),
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: "email"),
             ),
+            const SizedBox(height: 10),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: "şifre"),
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: "şifre"),
+              obscureText: true,
             ),
-            SizedBox(height: 20),
-            ElevatedButton(onPressed: _login, child: Text("giriş")),
+            const SizedBox(height: 20),
+            ElevatedButton(onPressed: _login, child: const Text("giriş")),
             if (_errorMessage.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top:20.0),
-              child: Text(
-                _errorMessage,
-                style: TextStyle(color: Colors.red),
-              ), )
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              )
           ],
         ),
-        ),
-        
+      ),
     );
   }
 }
